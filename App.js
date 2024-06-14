@@ -1,4 +1,4 @@
-import { StatusBar } from "expo-status-bar";
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -7,37 +7,55 @@ import {
   FlatList,
   Modal,
 } from "react-native";
-import Tabla from "./pages/Tabla";
-import React from "react";
 import Colors from "./Colors";
 import { AntDesign } from "@expo/vector-icons";
 import tempData from "./tempData";
 import ToDoList from "./components/ToDoList";
 import AddListModal from "./components/AddListModal";
+
 export default class App extends React.Component {
   state = {
     addToDoVisible: false,
-    lists:tempData
+    lists: tempData,
   };
-  toggleAddToDoModal() {
+
+  toggleAddToDoModal = () => {
     this.setState({ addToDoVisible: !this.state.addToDoVisible });
-  }
-  renderList = (list) => {
-    return <ToDoList list={list} />;
   };
-  addList=list =>{
-this.setState({lsits:[this.state.lists,{...list,id:this.state.lists.length + 1, todos:[]}]})
-  }
-  
+
+  renderList = (list) => {
+    return <ToDoList list={list} updateList={this.updateList} />;
+  };
+
+  addList = (list) => {
+    this.setState({
+      lists: [
+        ...this.state.lists,
+        { ...list, id: this.state.lists.length + 1, todos: [] },
+      ],
+    });
+  };
+
+  updateList = (list) => {
+    this.setState({
+      lists: this.state.lists.map((item) => {
+        return item.id === list.id ? list : item;
+      }),
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <Modal
           animationType="slide"
           visible={this.state.addToDoVisible}
-          onRequestClose={() => this.toggleAddToDoModal()}
+          onRequestClose={this.toggleAddToDoModal}
         >
-          <AddListModal closeModal={() => this.toggleAddToDoModal()}  addList={this.addList}/>
+          <AddListModal
+            closeModal={this.toggleAddToDoModal}
+            addList={this.addList}
+          />
         </Modal>
         <View style={{ flexDirection: "row" }}>
           <View style={styles.divider} />
@@ -50,20 +68,20 @@ this.setState({lsits:[this.state.lists,{...list,id:this.state.lists.length + 1, 
         <View style={{ marginVertical: 48 }}>
           <TouchableOpacity
             style={styles.addList}
-            onPress={() => this.toggleAddToDoModal()}
+            onPress={this.toggleAddToDoModal}
           >
             <AntDesign name="plus" size={16} color={Colors.blue} />
           </TouchableOpacity>
-          <Text style={styles.add}>Add List</Text>
+          <Text style={styles.add}>Agregar</Text>
         </View>
-
-        <View style={{ height: 275, padding: 32 }}>
+        <View style={{ height: 350, padding:10 }}>
           <FlatList
             data={this.state.lists}
             keyExtractor={(item) => item.name}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             renderItem={({ item }) => this.renderList(item)}
+            keyboardShouldPersistTaps='always'
           />
         </View>
       </View>

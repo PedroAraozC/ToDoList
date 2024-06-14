@@ -23,7 +23,7 @@ export default class ToDoList extends React.Component {
           visible={this.state.showListVisible}
           onRequestClose={() => this.toggleListModal()}
         >
-          <ToDoModal list={list} closeModal={() => this.toggleListModal()} />
+          <ToDoModal list={list} closeModal={() => this.toggleListModal()} updateList={this.props.updateList} />
         </Modal>
         <TouchableOpacity
           style={[styles.listContainer, { backgroundColor: list.color }]}
@@ -35,11 +35,11 @@ export default class ToDoList extends React.Component {
           <View>
             <View style={{ alignItems: "center" }}>
               <Text style={styles.count}>{remainingCount}</Text>
-              <Text style={styles.subtitle}>Remaining</Text>
+              <Text style={styles.subtitle}>Pendientes</Text>
             </View>
             <View style={{ alignItems: "center" }}>
               <Text style={styles.count}>{completedCount}</Text>
-              <Text style={styles.subtitle}>Completed</Text>
+              <Text style={styles.subtitle}>Completadas</Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -58,13 +58,13 @@ const styles = StyleSheet.create({
     width: 200,
   },
   listTitle: {
-    fontSize: 24,
+    fontSize: 15,
     fontWeight: "700",
     color: Colors.white,
     marginBottom: 18,
   },
   count: {
-    fontSize: 48,
+    fontSize: 30,
     fontWeight: "200",
     color: Colors.white,
   },

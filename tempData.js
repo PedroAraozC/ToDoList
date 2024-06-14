@@ -1,54 +1,57 @@
 export default tempData = [
   {
-    name: "Plan a Trip",
+    id: 1,
+    name: "Planear viaje",
     color: "#24A6D9",
     todos: [
       {
-        title: "Book Flight",
+        title: "Libro de Pelea",
         completed: false,
       },
       {
-        title: "Passport Check",
+        title: "Passaporte",
         completed: true,
       },
       {
-        title: "Reserve Hotel Room",
+        title: "Reservar Hotel",
         completed: true,
       },
       {
-        title: "Pack Luggage",
+        title: "Empacar Comida",
         completed: false,
       },
     ],
   },
   {
-    name: "Errands",
+    id: 2,
+    name: "Mandandos",
     color: "#802209",
     todos: [
       {
-        title: "Buy Milk",
+        title: "Comprar Leche",
         completed: false,
       },
       {
-        title: "Plan Weekend camping trip",
+        title: "Planear un fin de semana de campamento",
         completed: true,
       },
       {
-        title: "Run 2 miles",
+        title: "Correr 2 Millas",
         completed: true,
       },
       {
-        title: "Make a Video",
+        title: "Hacer un Video",
         completed: true,
       },
       {
-        title: "Take dog dor a walk",
+        title: "Pasear al perro",
         completed: true,
       },
     ],
   },
   {
-    name: "Birthday Party",
+    id: 3,
+    name: "Fiesta de cumpleaños",
     color: "#595BD9",
     todos: [
       {

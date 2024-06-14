@@ -13,7 +13,6 @@ import Colors from "../Colors";
 
 export default class AddListModal extends React.Component {
   backgroundColors = [
-    "#55CD859",
     "#24A6D9",
     "#595BD9",
     "#8022D9",
@@ -28,8 +27,8 @@ export default class AddListModal extends React.Component {
 
   createToDo = () => {
     const { name, color } = this.state;
-    const list = {name,color}
-    this.props.addList(list)
+    const list = { name, color };
+    this.props.addList(list);
     this.setState({ name: "" });
     this.props.closeModal();
   };
@@ -38,7 +37,14 @@ export default class AddListModal extends React.Component {
       return (
         <TouchableOpacity
           key={color}
-          style={[styles.colorSelect, { backgroundColor: color }]}
+          style={[
+            styles.colorSelect,
+            {
+              borderColor: Colors.black,
+              borderWidth: 1,
+              backgroundColor: color,
+            },
+          ]}
           onPress={() => this.setState({ color })}
         />
       );
@@ -54,11 +60,11 @@ export default class AddListModal extends React.Component {
           <AntDesign name="close" size={24} color={Colors.black} />
         </TouchableOpacity>
         <View style={{ alignSelf: "stretch", marginHorizontal: 32 }}>
-          <Text style={styles.title}>Create To Do List</Text>
+          <Text style={styles.title}>Crea To Do List</Text>
 
           <TextInput
             style={styles.input}
-            placeholder="'Nombre de lista'"
+            placeholder="Nombre de lista . . . "
             onChangeText={(text) => this.setState({ name: text })}
           />
           <View
@@ -71,10 +77,16 @@ export default class AddListModal extends React.Component {
             {this.renderColors()}
           </View>
           <TouchableOpacity
-            style={[styles.create, { backgroundColor: this.state.color }]}onPress={this.createToDo}
+            style={[styles.create, { backgroundColor: this.state.color }]}
+            onPress={this.createToDo}
           >
-            <Text style={{ color: Colors.white, fontWeight: "600" }}>
-              Create!
+            <Text
+              style={{
+                color: Colors.white,
+                fontWeight: "600",
+              }}
+            >
+              Crear!
             </Text>
           </TouchableOpacity>
         </View>
